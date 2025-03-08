@@ -1,3 +1,4 @@
 SQLAlchemy
 Pillow
 python-dotenv
+tk
