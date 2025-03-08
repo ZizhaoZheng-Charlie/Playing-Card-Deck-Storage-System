@@ -1,0 +1,70 @@
+
+# Byte-compiled files
+*.py[cod]
+__pycache__/
+
+# PySide6 UI compiled Python files
+*.ui.py
+
+# Virtual environment
+venv/
+env/
+*.venv/
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE-specific files
+.idea/
+.vscode/
+*.iml
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# CMake build artifacts (if using CMake)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Qt Creator specific files (if using Qt Creator)
+*.pro.user
+*.qmake.stash
+*.qmake.cache
+
+# PyInstaller build artifacts (if using PyInstaller)
+build/
+dist/
+*.spec
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Testing artifacts
+.tox/
+.nox/
+.pytest_cache/
+
+# Mypy
+.mypy_cache/
+.dmypy.json
+
+# Linter artifacts
+.pylint.d/
