@@ -68,3 +68,4 @@ htmlcov/
 
 # Linter artifacts
 .pylint.d/
+*.zip
