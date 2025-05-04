@@ -1,51 +1,70 @@
-# Storage Management System
+# Card Collection Manager
 
-A Python-based storage management system with a graphical user interface (GUI) built using Tkinter and SQLAlchemy. It allows you to manage an inventory of items, track a wishlist, and store details including images and associated series information.
+A comprehensive desktop application built with Python, Tkinter, and SQLAlchemy to manage your card collections, including inventory and wishlist tracking.
 
 ## Features
 
-- **Tabbed Interface:** Manage inventory and wishlist in separate tabs.
-- **Inventory Management:**
-    - Add items with name, series, quantity, image, and status (signature, gilded, sealed).
-    - Edit existing items.
-    - Delete items.
-    - View items in a sortable table.
-    - Image preview for selected items.
-- **Series Management:**
-    - Add new series with name, company, and website URL.
-    - Manage existing series (view, delete).
-    - Link items to series.
-    - Open series website directly from inventory or series management.
-- **Wishlist Management:**
-    - Add items you want to acquire with name, series, expected price, shop URL, notes, priority, and status (signature, gilded, sealed).
-    - Edit wishlist items.
-    - Delete wishlist items.
-    - Mark items as acquired, moving them to the inventory.
-    - View wishlist items in a sortable table.
-    - View notes for selected wishlist items.
-    - Open shop URL directly from the wishlist.
-- **Item Details View:**
-    - Double-click any item (inventory or wishlist) to view all its details in a dedicated window.
-- **Database:**
-    - Uses SQLite for persistent storage (`storage.db`).
-    - SQLAlchemy ORM for database interactions.
+This card collection management system includes:
 
-## Requirements
+1.  **Series Management**:
 
-- Python 3.7 or higher
-- Required packages (install using pip):
-  ```bash
-  pip install -r requirements.txt
-  ```
+    - Add, view, and delete series.
+    - Cascade deletion for items when their series is deleted.
+    - Track company information and shop websites for series.
 
-## Setup
+2.  **Item Status Tracking**:
 
-1.  **Clone the repository:**
-    ```bash
-    git clone <repository_url>
-    cd <repository_directory>
-    ```
-2.  **Create and activate a virtual environment (recommended):**
+    - Checkboxes for signature, gilded, and sealed status for both inventory and wishlist items.
+    - Robust database schema to preserve detailed item data.
+
+3.  **Detailed Item Viewing**:
+
+    - Dedicated windows to view all details for inventory and wishlist items.
+    - Double-click functionality for quick access to item information.
+    - Image preview capabilities with support for various formats (PNG, JPG, GIF).
+
+4.  **Editing Functionality**:
+
+    - Edit existing inventory and wishlist items through dedicated forms.
+    - Scrollable content areas in edit windows for better usability.
+
+5.  **Filtering and Sorting**:
+
+    - Filter items by ID, name, series, company, and item properties (signature, gilded, sealed).
+    - Sort table columns by clicking on headers.
+    - Clear filter functionality to reset the view.
+
+6.  **Wishlist System**:
+
+    - Separate tab for managing your wishlist.
+    - Track expected prices, shop URLs, notes, and priority for desired items.
+    - "Mark as acquired" feature to easily move items from the wishlist to inventory.
+
+7.  **UI Improvements**:
+    - Modern tabbed interface (Inventory & Wishlist) for clear organization.
+    - Direct links to open series websites or item shop URLs in your browser.
+    - Full scrolling interface in main tabs to handle large collections.
+    - Custom application icon.
+
+## Installation
+
+There are two ways to use the Card Collection Manager:
+
+**Method 1: Using the Executable (Recommended for Windows Users)**
+
+1.  Download the latest release package (usually a `.zip` file).
+2.  Extract the contents of the zip file to a folder on your computer.
+3.  Navigate into the extracted folder, then into the `dist` subfolder.
+4.  Double-click `Card Collection Manager.exe` to run the application.
+    - No Python installation is required.
+    - The `storage.db` file (your collection data) and `assets` folder must be kept in the same directory as the executable.
+
+**Method 2: Running from Source**
+
+1.  Ensure you have Python 3.7 or higher installed.
+2.  Clone or download this repository.
+3.  Open a terminal or command prompt in the project directory.
+4.  Create a virtual environment (recommended):
     ```bash
     python -m venv venv
     # On Windows
@@ -53,41 +72,47 @@ A Python-based storage management system with a graphical user interface (GUI) b
     # On macOS/Linux
     source venv/bin/activate
     ```
-3.  **Install dependencies:**
+5.  Install the required dependencies:
     ```bash
     pip install -r requirements.txt
     ```
-4.  **Initialize/Migrate Database:**
-    - The first time you run `app.py`, the database (`storage.db`) and tables will be created automatically.
-    - If you encounter schema errors after updates (e.g., `no such column`), run the migration script:
-      ```bash
-      python migrate_db.py
-      ```
-5.  **Run the application:**
+6.  Run the application:
     ```bash
     python app.py
     ```
 
 ## Usage
 
-- Use the **Inventory** tab to manage items you own.
-- Use the **Wishlist** tab to track items you want to buy.
-- **Adding Items/Wish Items:** Use the forms and buttons provided in each tab.
-- **Managing Series:** Use the "Add Series" and "Manage Series" buttons in the Inventory tab's input section.
-- **Viewing Details:** Double-click an item in either list or select it and click "View Details".
-- **Editing:** Select an item and click "Edit Selected".
-- **Deleting:** Select an item and click "Delete Selected".
-- **Websites/URLs:** Use the dedicated buttons or double-click items (in some views) to open associated websites.
+- Use the tabs to switch between your **Inventory** and **Wishlist**.
+- Use the forms and buttons to **add**, **edit**, or **delete** items and series.
+- **Filter** your lists using the provided search, dropdown, and checkbox options.
+- **Sort** lists by clicking on column headers.
+- **Double-click** an item in the list or use the "View Details" button to see all its information.
+- Manage series using the **Add Series** and **Manage Series** buttons in the Inventory tab.
+- Use the **Mark as Acquired** button in the Wishlist tab to move items to your inventory.
 
-## Database Schema Updates
+## Building from Source
 
-If the database schema changes (e.g., new columns are added to tables in `models.py`), you might need to update your existing `storage.db` file. Run the migration script provided:
+If you want to create the executable yourself:
 
-```bash
-python migrate_db.py
-```
+1.  Follow steps 1-5 in "Method 2: Running from Source".
+2.  Install PyInstaller:
+    ```bash
+    pip install pyinstaller
+    ```
+3.  Generate the application icon (optional, requires Pillow):
+    ```bash
+    python create_icon.py
+    ```
+4.  Run PyInstaller using the spec file:
+    ```bash
+    pyinstaller card_manager.spec
+    ```
+5.  The executable and necessary files will be located in the `dist` folder.
 
-This script attempts to back up existing data, recreate the tables with the new schema, and restore the data.
+## Database
+
+The application uses SQLite (`storage.db`) for data storage. This file is created automatically in the application's directory.
 
 ## License
 
